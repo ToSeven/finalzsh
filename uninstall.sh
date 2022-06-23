@@ -1,6 +1,10 @@
 #!/bin/bash
-sudo apt uninstall zsh
 
-chsh -s /bin/bash
+sudo apt purge zsh
 
-rm -rf ~/.zplug
+sudo rm -rf ~/.zplug
+
+bash
+
+
+

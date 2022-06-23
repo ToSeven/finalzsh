@@ -18,10 +18,10 @@ function get_os_type()
 function install_on_linux_software()
 {
 
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
     sudo apt update
-    sudo apt install -y zsh lua git gawk
-
-    sudo chsh -s /bin/zsh
+    sudo apt install -y zsh lua5.1 git gawk curl gh
 
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
@@ -30,9 +30,8 @@ function install_on_linux_software()
 function install_on_mac_software()
 {
 
-    brew install zsh lua git gawk
+    brew install zsh lua5.1 git gawk curl gh
 
-    sudo chsh -s /bin/zsh
 
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
@@ -40,16 +39,33 @@ function install_on_mac_software()
 
 function install_zplug()
 {
-    export ZPLUG_HOME=~/.zplug
-    git clone https://github.com/zplug/zplug $ZPLUG_HOME
-
+     git clone https://github.com/zplug/zplug ~/.zplug
 }
 
-function change_config_file()
+function backup_file()
 {
-    
-    cat ./config.zshrc >> ~/.zshrc
-    source ~/.zshrc
+    argv=$1
+    user=$(whoami)
+    file="/home/${user}/${argv}"
+    copy_file="/home/${user}/backup_${argv}"
+    if [ ! -f "$file" ]; then
+        return 
+    else
+        echo "Would you like to back up the ${argv} file (y/No)?"
+        read -r choice
+        if [ ${choice} == "y" ]; then
+            sudo cp -r  "${file}" "${copy_file}"
+        else
+            return
+        fi
+    fi
+}
+
+function link_files()
+{
+     ln -sf $(pwd)/dotfiles/.zshrc ~/.zshrc
+     ln -sf $(pwd)/dotfiles/.gitconfig ~/.gitconfig
+     ln -sf $(pwd)/dotfiles/.p10k.zsh ~/.p10k.zsh
 }
 
 function main()
@@ -63,25 +79,25 @@ function main()
         install_on_linux_software
     fi
 
+    # install zplug
     echo "Do you want to install zplug? (y/N)"
-    read choice
+    read -r choice
 
-    if [ choice == "y" ] ; then
+    if [ ${choice} == "y" ] ; then
         echo "installing ..."
         install_zplug
     else
         echo "skip this step"
     fi
 
-    echo "Do you want to change the .zshrc file? (y/N)"
-    read choice
+    backup_file ".zshrc"
+    backup_file ".gitconfig"
+    backup_file ".p10k.zsh"
 
-    if [ choice == "y" ] ; then
-        echo "changing ..."
-        edit_config_file
-    else
-        echo "skip this step"
-    fi
+    link_files
+    
+    zsh
+    source ~/.zshrc
 
     echo "All Done!"
 
