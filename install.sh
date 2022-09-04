@@ -18,10 +18,8 @@ function get_os_type()
 function install_on_linux_software()
 {
 
-    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-    sudo apt update
-    sudo apt install -y zsh lua5.1 git gawk curl gh
+#    sudo apt update
+    sudo apt install -y zsh lua5.1 git gawk curl 
 
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
@@ -30,7 +28,7 @@ function install_on_linux_software()
 function install_on_mac_software()
 {
 
-    brew install zsh lua5.1 git gawk curl gh
+    brew install zsh lua5.1 git gawk curl 
 
 
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -47,7 +45,7 @@ function backup_file()
     argv=$1
     user=$(whoami)
     file="/home/${user}/${argv}"
-    copy_file="/home/${user}/backup_${argv}"
+    copy_file="/home/${user}/backup_${argv}[1:]"
     if [ ! -f "$file" ]; then
         return 
     else
@@ -63,9 +61,8 @@ function backup_file()
 
 function link_files()
 {
-     ln -sf $(pwd)/dotfiles/.zshrc ~/.zshrc
-     ln -sf $(pwd)/dotfiles/.gitconfig ~/.gitconfig
-     ln -sf $(pwd)/dotfiles/.p10k.zsh ~/.p10k.zsh
+     ln -sf $(pwd)/dotfiles/zshrc ~/.zshrc
+     ln -sf $(pwd)/dotfiles/p10k.zsh ~/.p10k.zsh
 }
 
 function main()
