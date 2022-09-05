@@ -28,7 +28,7 @@ function install_on_linux_software()
 function install_on_mac_software()
 {
 
-    brew install zsh lua5.1 git gawk curl 
+    brew install zsh lua git gawk curl 
 
 
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -44,17 +44,14 @@ function backup_file()
 {
     argv=$1
     user=$(whoami)
-    file="/home/${user}/${argv}"
-    copy_file="/home/${user}/backup_${argv}[1:]"
-    if [ ! -f "$file" ]; then
-        return 
-    else
+    file="~/${argv}"
+    echo $file
+    copy_file="${file}/backup${argv}[1:]"
+    if [ -L $file ]; then
         echo "Would you like to back up the ${argv} file (y/No)?"
         read -r choice
         if [ ${choice} == "y" ]; then
             sudo cp -r  "${file}" "${copy_file}"
-        else
-            return
         fi
     fi
 }
@@ -88,7 +85,6 @@ function main()
     fi
 
     backup_file ".zshrc"
-    backup_file ".gitconfig"
     backup_file ".p10k.zsh"
 
     link_files
