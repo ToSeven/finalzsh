@@ -16,7 +16,6 @@ alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-alias vim="nvim"
 #####################################################
 
 # Save type history for completion and easier life
@@ -34,12 +33,15 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "softmoth/zsh-vim-mode"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "Aloxaf/fzf-tab"
-zplug "skywind3000/z.lua"
+zplug "wting/autojump", as:command, hook-build:"python ./install.py"
 
 # Supports oh-my-zsh plugins and the like
 zplug "plugins/git",   from:oh-my-zsh
-zplug "plugins/sudo",   from:oh-my-zsh
+zplug "plugins/sudo",   from:oh-my-zsh  ##press ese key twice
 zplug "plugins/extract",   from:oh-my-zsh
+zplug "plugins/autojump",  from:oh-my-zsh
+zplug "plugins/cp",   from:oh-my-zsh    # show progress
+zplug "plugins/git-open",   from:oh-my-zsh #open github page
 
 # Load if "if" tag returns true
 # zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
@@ -61,8 +63,8 @@ fi
 zplug load --verbose
 
 # 补全快捷键重设
-bindkey '^ ' autosuggest-accept
-
+bindkey '^\' autosuggest-accept
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export DISPLAY=:0.0

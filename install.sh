@@ -15,24 +15,39 @@ function get_os_type()
 
 }
 
-function install_on_linux_software()
+# 安装linux平台字体
+function install_fonts_on_linux()
 {
+    mkdir -p ~/.local/share/fonts
+    rm -rf ~/.local/share/fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf
+    cp ./fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf ~/.local/share/fonts
 
-#    sudo apt update
-    sudo apt install -y zsh lua5.1 git gawk curl 
+    fc-cache -vf ~/.local/share/fonts
+}
 
+# 安装mac平台字体
+function install_fonts_on_mac()
+{
+    rm -rf ~/Library/Fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf
+    cp ./fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf ~/Library/Fonts
+}
+
+function install_fzf()
+{
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
     ~/.fzf/install
+}
+
+function install_on_linux_software()
+{
+    sudo apt update
+    sudo apt install -y zsh git gawk curl 
 }
 
 function install_on_mac_software()
 {
 
-    brew install zsh lua git gawk curl 
-
-
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
+    brew install zsh git gawk curl
 }
 
 function install_zplug()
@@ -43,11 +58,10 @@ function install_zplug()
 function backup_file()
 {
     argv=$1
-    user=$(whoami)
-    file="~/${argv}"
-    echo $file
-    copy_file="${file}/backup${argv}[1:]"
-    if [ -L $file ]; then
+    file="${HOME}/${argv}"
+    copy_file="${HOME}/backup_${argv:1}"
+
+    if [ -e "${file}" ]; then
         echo "Would you like to back up the ${argv} file (y/No)?"
         read -r choice
         if [ ${choice} == "y" ]; then
@@ -56,10 +70,10 @@ function backup_file()
     fi
 }
 
-function link_files()
+function copy_files()
 {
-     ln -sf $(pwd)/dotfiles/zshrc ~/.zshrc
-     ln -sf $(pwd)/dotfiles/p10k.zsh ~/.p10k.zsh
+     cp $(pwd)/dotfiles/zshrc ~/.zshrc
+     cp $(pwd)/dotfiles/p10k.zsh ~/.p10k.zsh
 }
 
 function main()
@@ -69,8 +83,10 @@ function main()
     
     if [ ${type} == "Darwin" ]; then
         install_on_mac_software
+        install_fonts_on_mac
     else
         install_on_linux_software
+        install_fonts_on_linux
     fi
 
     # install zplug
@@ -87,13 +103,15 @@ function main()
     backup_file ".zshrc"
     backup_file ".p10k.zsh"
 
-    link_files
+    copy_files
     
-    zsh
-    source ~/.zshrc
+    install_fzf
+
+    chsh -s /bin/zsh
 
     echo "All Done!"
 
+    zsh
 }
 
 main
