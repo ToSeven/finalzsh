@@ -72,8 +72,9 @@ function backup_file()
 
 function copy_files()
 {
-     cp $(pwd)/dotfiles/zshrc ~/.zshrc
-     cp $(pwd)/dotfiles/p10k.zsh ~/.p10k.zsh
+     ln -s $(pwd)/dotfiles/zshrc ~/.zshrc
+     ln -s $(pwd)/dotfiles/p10k.zsh ~/.p10k.zsh
+     ln -s $(pwd)/dotfiles/zshrc_custom ~/.zshrc_custom.zsh
 }
 
 function main()
@@ -90,8 +91,7 @@ function main()
     fi
 
     # install zplug
-    echo "Do you want to install zplug? (y/N)"
-    read -r choice
+    read -p  "Do you want to install zplug? (y/N)" choice
 
     if [ ${choice} == "y" ] ; then
         echo "installing ..."
@@ -102,6 +102,7 @@ function main()
 
     backup_file ".zshrc"
     backup_file ".p10k.zsh"
+    backup_file ".zshrc_custom.zsh"
 
     copy_files
     

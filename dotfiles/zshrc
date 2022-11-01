@@ -5,8 +5,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
-
 # alias
 alias ls='ls -lh --color=auto'
 alias ll='ls -lh --color=auto'
@@ -42,6 +40,8 @@ zplug "plugins/extract",   from:oh-my-zsh
 zplug "plugins/autojump",  from:oh-my-zsh
 zplug "plugins/cp",   from:oh-my-zsh    # show progress
 zplug "plugins/git-open",   from:oh-my-zsh #open github page
+
+source ~/.zshrc_custom.zsh
 
 # Load if "if" tag returns true
 # zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
