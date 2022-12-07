@@ -62,19 +62,22 @@ function backup_file()
     copy_file="${HOME}/backup_${argv:1}"
 
     if [ -e "${file}" ]; then
-        echo "Would you like to back up the ${argv} file (y/No)?"
+        echo "Would you like to back up the ${argv} file (y/N)?"
         read -r choice
         if [ ${choice} == "y" ]; then
-            sudo cp -r  "${file}" "${copy_file}"
+            sudo cp -f  "${file}" "${copy_file}"
         fi
     fi
 }
 
 function copy_files()
 {
-     ln -s $(pwd)/dotfiles/zshrc ~/.zshrc
-     ln -s $(pwd)/dotfiles/p10k.zsh ~/.p10k.zsh
-     ln -s $(pwd)/dotfiles/zshrc_custom ~/.zshrc_custom.zsh
+     cp -f $(pwd)/dotfiles/zshrc ~/.zshrc
+     cp -f $(pwd)/dotfiles/p10k.zsh ~/.p10k.zsh
+
+     if [ ! -e "~/.custom_zshrc.zsh" ]; then
+     	cp -f $(pwd)/dotfiles/custom_zshrc.zsh ~/.custom_zshrc.zsh
+     fi
 }
 
 function main()
@@ -100,9 +103,10 @@ function main()
         echo "skip this step"
     fi
 
+    # backup some files
     backup_file ".zshrc"
     backup_file ".p10k.zsh"
-    backup_file ".zshrc_custom.zsh"
+    backup_file ".custom_custom.zsh"
 
     copy_files
     

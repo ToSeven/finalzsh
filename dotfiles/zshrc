@@ -41,7 +41,7 @@ zplug "plugins/autojump",  from:oh-my-zsh
 zplug "plugins/cp",   from:oh-my-zsh    # show progress
 zplug "plugins/git-open",   from:oh-my-zsh #open github page
 
-source ~/.zshrc_custom.zsh
+source ~/.custom_zshrc.zsh
 
 # Load if "if" tag returns true
 # zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
@@ -60,7 +60,7 @@ fi
 
 
 # Then, source plugins and add commands to $PATH
-zplug load --verbose
+zplug load 
 
 # 补全快捷键重设
 bindkey '^\' autosuggest-accept

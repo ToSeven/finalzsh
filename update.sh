@@ -2,5 +2,8 @@
 
 git pull master origin
 
+./uninstall.sh
+./install.sh
+
 source ~/.zshrc
 
