@@ -3,7 +3,7 @@
 function get_os_type()
 {
     platform=$(uname)
-    if [ ${platform} == "Darwin" ]; then
+    if [ "${platform}" == "Darwin" ]; then
         echo "Darwin"
     elif grep -Eq "Ubuntu" /etc/*-release; then
         echo "Ubuntu"
@@ -64,7 +64,7 @@ function backup_file()
     if [ -e "${file}" ]; then
         echo "Would you like to back up the ${argv} file (y/N)?"
         read -r choice
-        if [ ${choice} == "y" ]; then
+        if [ "${choice}" == "y" ]; then
             sudo cp -f  "${file}" "${copy_file}"
         fi
     fi
@@ -72,20 +72,20 @@ function backup_file()
 
 function copy_files()
 {
-     cp -f $(pwd)/dotfiles/zshrc ~/.zshrc
-     cp -f $(pwd)/dotfiles/p10k.zsh ~/.p10k.zsh
+     cp -f "$(pwd)/dotfiles/zshrc" "$HOME/.zshrc"
+     cp -f "$(pwd)/dotfiles/p10k.zsh" "$HOME/.p10k.zsh"
 
-     if [ ! -e "~/.custom_zshrc.zsh" ]; then
-     	cp -f $(pwd)/dotfiles/custom_zshrc.zsh ~/.custom_zshrc.zsh
+     if [ ! -e "$HOME/.custom_zshrc.zsh" ]; then
+     	cp -f "$(pwd)/dotfiles/custom_zshrc.zsh" "$HOME/.custom_zshrc.zsh"
      fi
 }
 
 function main()
 {
-    type=`get_os_type`
-    echo "os type:"$type 
+    type=$(get_os_type)
+    echo "os type: $type"
     
-    if [ ${type} == "Darwin" ]; then
+    if [ "${type}" == "Darwin" ]; then
         install_on_mac_software
         install_fonts_on_mac
     else

@@ -94,8 +94,11 @@ Finalzsh 利用shell脚本编写自动化操作，因此需要类Unix执行环�
 <!-- USAGE EXAMPLES -->
 ## Usage
 
+### 快捷键
 `CTRL + \` 命令自动化补全
+`ESC` 命令缺乏权限执行失败时，自动添加sudo前缀
 
+### 命令
 1.终端皮肤自定义命令
 > p10k configuration
 
@@ -104,6 +107,25 @@ Finalzsh 利用shell脚本编写自动化操作，因此需要类Unix执行环�
 
 3.目录跳转命令
 > j target_dir
+
+4.打开该目录的文件管理器
+> jo target_dir
+
+5.跳转上级目录 
+> up 1 # 返回上一级目录 
+
+6.打开该项目的GitHub网页
+> git-open
+
+7.解压压缩包
+> extract
+
+8.自动生成.gitignore文件
+>gi 
+   
+
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -14,12 +14,13 @@ alias vdir='vdir --color=auto'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+alias gi="git-ignore"
 #####################################################
 
 # Save type history for completion and easier life
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 setopt appendhistory
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -30,8 +31,13 @@ zplug "romkatv/powerlevel10k", as:theme
 zplug "zsh-users/zsh-autosuggestions"
 zplug "softmoth/zsh-vim-mode"
 zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "Aloxaf/fzf-tab"
 zplug "wting/autojump", as:command, hook-build:"python ./install.py"
+# zplug "voronkovich/gitignore.plugin.zsh"
+zplug "peterhurford/up.zsh"
+zplug "hlissner/zsh-autopair", defer:2"
+zplug "laggardkernel/git-ignore"
 
 # Supports oh-my-zsh plugins and the like
 zplug "plugins/git",   from:oh-my-zsh
@@ -40,6 +46,7 @@ zplug "plugins/extract",   from:oh-my-zsh
 zplug "plugins/autojump",  from:oh-my-zsh
 zplug "plugins/cp",   from:oh-my-zsh    # show progress
 zplug "plugins/git-open",   from:oh-my-zsh #open github page
+zplug "plugins/colored-man-pages",   from:oh-my-zsh 
 
 source ~/.custom_zshrc.zsh
 
