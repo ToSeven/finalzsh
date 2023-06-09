@@ -1,12 +1,5 @@
 <a name="readme-top"></a>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -28,6 +21,12 @@
     <a href="https://github.com/ToSeven/finalzsh/issues">Request Feature</a>
   </p>
 </div>
+
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 
 
 
@@ -123,8 +122,6 @@ Finalzsh 利用shell脚本编写自动化操作，因此需要类Unix执行环�
 8.自动生成.gitignore文件
 >gi 
    
-
-
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

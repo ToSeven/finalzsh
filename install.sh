@@ -32,12 +32,6 @@ function install_fonts_on_mac()
     cp ./fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf ~/Library/Fonts
 }
 
-function install_fzf()
-{
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install
-}
-
 function install_on_linux_software()
 {
     sudo apt update
@@ -47,12 +41,12 @@ function install_on_linux_software()
 function install_on_mac_software()
 {
 
-    brew install zsh git gawk curl
+    brew install zsh git gawk curl fzf
 }
 
 function install_zplug()
 {
-     git clone https://github.com/zplug/zplug ~/.zplug
+     git clone https://github.com/zplug/zplug $HOME/.zplug
 }
 
 function backup_file()
@@ -61,6 +55,7 @@ function backup_file()
     file="${HOME}/${argv}"
     copy_file="${HOME}/backup_${argv:1}"
 
+    #if files exist, then backup those files
     if [ -e "${file}" ]; then
         echo "Would you like to back up the ${argv} file (y/N)?"
         read -r choice
@@ -84,6 +79,7 @@ function main()
 {
     type=$(get_os_type)
     echo "os type: $type"
+
     
     if [ "${type}" == "Darwin" ]; then
         install_on_mac_software
@@ -94,31 +90,28 @@ function main()
     fi
 
     # install zplug
-    read -p  "Do you want to install zplug? (y/N)" choice
 
-    if [ ${choice} == "y" ] ; then
-        echo "installing ..."
-        install_zplug
-    else
-        echo "skip this step"
-    fi
+    echo "installing zplug ..."
+    install_zplug
 
     # backup some files
     backup_file ".zshrc"
     backup_file ".p10k.zsh"
     backup_file ".custom_custom.zsh"
-
+    
     copy_files
     
-    install_fzf
+    sudo chsh -s /bin/zsh
+    
+    zsh 
 
-    chsh -s /bin/zsh
+    echo "exec: $?"
+    ls -al $HOME/.zplug/
+
+    top
 
     echo "All Done!"
 
-    zsh
 }
 
-main
-
-
+main 

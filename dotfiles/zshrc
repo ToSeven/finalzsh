@@ -22,8 +22,8 @@ HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 setopt appendhistory
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+setopt sharehistory 
+setopt incappendhistory
 
 source ~/.zplug/init.zsh
 
@@ -36,7 +36,7 @@ zplug "Aloxaf/fzf-tab"
 zplug "wting/autojump", as:command, hook-build:"python ./install.py"
 # zplug "voronkovich/gitignore.plugin.zsh"
 zplug "peterhurford/up.zsh"
-zplug "hlissner/zsh-autopair", defer:2"
+zplug "hlissner/zsh-autopair", defer:2
 zplug "laggardkernel/git-ignore"
 
 # Supports oh-my-zsh plugins and the like
@@ -59,10 +59,7 @@ source ~/.custom_zshrc.zsh
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
+    zplug install
 fi
 
 
