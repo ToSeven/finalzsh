@@ -9,7 +9,7 @@
 
 <h3 align="center">Finalzsh</h3>
   <p align="center">
-    Use Your Terminal Like A Hacker
+    像黑客一样使用你的终端
     <br />
     <a href="https://github.com/ToSeven/finalzsh"><strong>Explore the docs »</strong></a>
     <br />
@@ -67,30 +67,27 @@
 
 [![Product Name Screen Shot][product-screenshot]](./images/screenshot.png)
 
-Finalzsh aims to configure your terminal with one click through scripts to realize terminal appearance customization, enhanced commands, plugin management, and other functions. This project is based on the Z shell terminal simulator, using a series of Zsh plugins to improve the terminal and achieve simple commands to complete complex interactive interface operations.
+`Finalzsh`通过脚本一键安装、配置现有终端，实现终端外观自定义、命令增强、插件管理等功能。本项目基于`Z shell` 终端模拟器，利用一系列zsh插件增强终端相关功能，达到简单命令完成复杂的界面交互操作目的。
 
 ### Feature
-
-- Plugin Manager (Install, Update, Uninstall Plugins)
-- Terminal appearance customization 
-- Enhanced Command
-- Automatic installation, update and uninstall software through scripts
+- 插件管理器（安装、更新、卸载插件）
+- 终端皮肤自定义
+- 终端功能操作命令（见Usage）
+- 脚本自动化安装、更新、卸载软件
 <!-- GETTING STARTED -->
 ## Getting Started
 
 ### Prerequisites
 
-Finalzsh utilizes shell scripts to execute automated operations, thus requiring a Unix-like platform environment. Finalzsh supports the following platforms:
-
+Finalzsh 利用shell脚本编写自动化操作，因此需要类Unix执行环境，Finalzsh支持以下平台：
  - Ubuntu
  - MacOS
  - Parrot
  - Wsl2 (windows)
 
 ### Installation
-
-  run the following script:
-  ```shell
+  运行以下脚本
+   ```shell
    ./install.sh
    ```
 
@@ -99,35 +96,33 @@ Finalzsh utilizes shell scripts to execute automated operations, thus requiring 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-### Shortcut keys 
+### 快捷键
+`CTRL + \` 命令自动化补全
+`ESC` 命令缺乏权限执行失败时，自动添加sudo前缀
 
-- `CTRL + \` Automatically complete commands
-- `ESC` Automatically add sudo prefix when failing commands because of Execution permissions. 
-
-### Command 
-
-1. customize the appearance of your terminal
+### 命令
+1.终端皮肤自定义命令
 > p10k configuration
 
-2. find some files
+2.查找命令 
 > fzf
 
-3. jump the target directory 
+3.目录跳转命令
 > j target_dir
 
-4. jump and open the target directory 
+4.打开该目录的文件管理器
 > jo target_dir
 
-5. return to the previous directory （note that 1 is a level） 
-> up 1 
+5.跳转上级目录 
+> up 1 # 返回上一级目录 
 
-6. Open the GitHub webpage of the project
+6.打开该项目的GitHub网页
 > git-open
 
-7.Decompress the file 
+7.解压压缩包
 > extract
 
-8.generate the .gitignore template
+8.自动生成.gitignore文件
 >gi 
    
 
@@ -139,9 +134,9 @@ Finalzsh utilizes shell scripts to execute automated operations, thus requiring 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Add a command like help 
-- [ ] Add some extra initial plugins
-- [ ] Improve the install.sh scripts
+- [ ] 终端内置帮助命令 
+- [ ] 添加初始化插件  
+- [ ] 改进软件更新功能脚本
 
 See the [open issues](https://github.com/ToSeven/finalzsh/issues) for a full list of proposed features (and known issues).
 
@@ -151,7 +146,7 @@ See the [open issues](https://github.com/ToSeven/finalzsh/issues) for a full lis
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what makes the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 Don't forget to give the project a star! Thanks again!

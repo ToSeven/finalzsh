@@ -26,27 +26,33 @@ function install_fonts_on_linux()
 }
 
 # 安装mac平台字体
-function install_fonts_on_mac()
-{
+function install_fonts_on_mac(){
     rm -rf ~/Library/Fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf
     cp ./fonts/Droid\ Sans\ Mono\ Nerd\ Font\ Complete.otf ~/Library/Fonts
+}
+
+function install_fzf()
+{
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --bin
 }
 
 function install_on_linux_software()
 {
     sudo apt update
     sudo apt install -y zsh git gawk curl 
+    install_fzf
 }
 
 function install_on_mac_software()
 {
-
-    brew install zsh git gawk curl fzf
+    brew install zsh git gawk curl 
+    install_fzf
 }
 
 function install_zplug()
 {
-     git clone https://github.com/zplug/zplug $HOME/.zplug
+     git clone https://github.com/zplug/zplug ~/.zplug
 }
 
 function backup_file()
@@ -104,11 +110,6 @@ function main()
     sudo chsh -s /bin/zsh
     
     zsh 
-
-    echo "exec: $?"
-    ls -al $HOME/.zplug/
-
-    top
 
     echo "All Done!"
 
