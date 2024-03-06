@@ -34,13 +34,14 @@ function install_fonts_on_mac(){
 function install_fzf()
 {
     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-    ~/.fzf/install --bin
+    cd ~/.fzf/ && git checkout 507089d7b235b602f2f400be34c79a895e8c10dc
+    ./install 
 }
 
 function install_on_linux_software()
 {
     sudo apt update
-    sudo apt install -y zsh git gawk curl 
+    sudo apt install -y zsh git gawk curl fontconfig
     install_fzf
 }
 
